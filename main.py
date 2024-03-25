@@ -38,18 +38,18 @@ while running:
                 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
                 # при попадании изменение скорости на случайную
-                speed_x = random.randint(-10, 10)
-                speed_y = random.randint(-10, 10)
+                speed_x = random.randint(-5, 5)
+                speed_y = random.randint(-5, 5)
 
-            # обновление позиции цели
-            target_x += speed_x
-            target_y += speed_y
+    # обновление позиции цели
+    target_x += speed_x
+    target_y += speed_y
 
-            # проверка на выход за границы и изменение направления движения при касании границ
-            if target_x <= 0 or target_x + target_width >= SCREEN_WIDTH:
-                speed_x = -speed_x
-            if target_y <= 0 or target_y + target_height >= SCREEN_HEIGHT:
-                speed_y = -speed_y
+    # проверка на выход за границы и изменение направления движения при касании границ
+    if target_x <= 0 or target_x + target_width >= SCREEN_WIDTH:
+        speed_x = -speed_x
+    if target_y <= 0 or target_y + target_height >= SCREEN_HEIGHT:
+        speed_y = -speed_y
 
     screen.blit(target_img, (target_x, target_y))
     pygame.display.update()
