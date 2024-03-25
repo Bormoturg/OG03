@@ -17,8 +17,13 @@ target_height = 80
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
+# определение скорости движения цели
+speed_x = 5
+speed_y = 5
+
 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
+clock = pygame.time.Clock()
 
 running = True
 while running:
@@ -31,7 +36,25 @@ while running:
             if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_height:
                 target_x = random.randint(0, SCREEN_WIDTH - target_width)
                 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
+
+                # при попадании изменение скорости на случайную
+                speed_x = random.randint(-10, 10)
+                speed_y = random.randint(-10, 10)
+
+            # обновление позиции цели
+            target_x += speed_x
+            target_y += speed_y
+
+            # проверка на выход за границы и изменение направления движения при касании границ
+            if target_x <= 0 or target_x + target_width >= SCREEN_WIDTH:
+                speed_x = -speed_x
+            if target_y <= 0 or target_y + target_height >= SCREEN_HEIGHT:
+                speed_y = -speed_y
+
     screen.blit(target_img, (target_x, target_y))
     pygame.display.update()
+
+    # установка кадров в секунду
+    clock.tick(60)
 
 pygame.quit()
